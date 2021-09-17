@@ -62,13 +62,14 @@ class Commands(commands.Cog):
 
 
     @commands.guild_only()
-    @commands.bot_has_guild_permissions(ban_members=True)
+    @commands.has_permissions(manage_messages=True)
     @commands.group(invoke_without_command=True)
     async def note(self, ctx):
         raise NoSubcommandFound
 
 
     @note.command(name='read', description='Read note for specified user')
+    @commands.has_permissions(manage_messages=True)
     async def read(self, ctx, member : discord.Member):
 
         await ctx.trigger_typing()
@@ -81,8 +82,7 @@ class Commands(commands.Cog):
             return await ctx.send("This user does not have any note")
 
         embed = discord.Embed(
-            title=f"Note for `{member.display_name}`",
-            description=f"{text[0]}",
+            description=f"**Note for {member.mention}**\n\n{text[0]}",
             colour=discord.Colour.gold()
         )
 
@@ -90,6 +90,7 @@ class Commands(commands.Cog):
 
 
     @note.command(name='add', description='Add note for specified user')
+    @commands.has_permissions(manage_messages=True)
     async def add(self, ctx, member : discord.Member, *, text):
 
         await ctx.trigger_typing()
@@ -122,6 +123,7 @@ class Commands(commands.Cog):
 
 
     @note.command(name='remove', description='Remove note for specified user')
+    @commands.has_permissions(manage_messages=True)
     async def remove(self, ctx, member : discord.Member):
 
         await ctx.trigger_typing()
@@ -149,6 +151,7 @@ class Commands(commands.Cog):
 
 
     @note.command(name='list', description='Lists all members which have notes')
+    @commands.has_permissions(manage_messages=True)
     async def list(self, ctx):
 
         await ctx.trigger_typing()
@@ -165,6 +168,7 @@ class Commands(commands.Cog):
 
 
     @note.command(name='append', description='Appends data to a pre-existing note')
+    @commands.has_permissions(manage_messages=True)
     async def append(self, ctx, member : discord.Member, *, text):
 
         await ctx.trigger_typing()

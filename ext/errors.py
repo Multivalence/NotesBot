@@ -27,7 +27,7 @@ class Errors(commands.Cog):
             return
 
         elif isinstance(error, discord.ext.commands.errors.MissingPermissions):
-            await ctx.send("You require Administrator privileges to do this command!")
+            await ctx.send("You require Moderator privileges to do this command!")
 
         else:
 
