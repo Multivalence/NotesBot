@@ -62,14 +62,14 @@ class Commands(commands.Cog):
 
 
     @commands.guild_only()
-    @commands.has_permissions(manage_messages=True)
+    @commands.check_any(commands.has_permissions(administrator=True), commands.has_any_role("Moderator"))
     @commands.group(invoke_without_command=True)
     async def note(self, ctx):
         raise NoSubcommandFound
 
 
     @note.command(name='read', description='Read note for specified user')
-    @commands.has_permissions(manage_messages=True)
+    @commands.check_any(commands.has_permissions(administrator=True), commands.has_any_role("Moderator"))
     async def read(self, ctx, member : discord.Member):
 
         await ctx.trigger_typing()
@@ -90,7 +90,7 @@ class Commands(commands.Cog):
 
 
     @note.command(name='add', description='Add note for specified user')
-    @commands.has_permissions(manage_messages=True)
+    @commands.check_any(commands.has_permissions(administrator=True), commands.has_any_role("Moderator"))
     async def add(self, ctx, member : discord.Member, *, text):
 
         await ctx.trigger_typing()
@@ -123,7 +123,7 @@ class Commands(commands.Cog):
 
 
     @note.command(name='remove', description='Remove note for specified user')
-    @commands.has_permissions(manage_messages=True)
+    @commands.check_any(commands.has_permissions(administrator=True), commands.has_any_role("Moderator"))
     async def remove(self, ctx, member : discord.Member):
 
         await ctx.trigger_typing()
@@ -151,7 +151,7 @@ class Commands(commands.Cog):
 
 
     @note.command(name='list', description='Lists all members which have notes')
-    @commands.has_permissions(manage_messages=True)
+    @commands.check_any(commands.has_permissions(administrator=True), commands.has_any_role("Moderator"))
     async def list(self, ctx):
 
         await ctx.trigger_typing()
@@ -168,7 +168,7 @@ class Commands(commands.Cog):
 
 
     @note.command(name='append', description='Appends data to a pre-existing note')
-    @commands.has_permissions(manage_messages=True)
+    @commands.check_any(commands.has_permissions(administrator=True), commands.has_any_role("Moderator"))
     async def append(self, ctx, member : discord.Member, *, text):
 
         await ctx.trigger_typing()
