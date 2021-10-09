@@ -159,7 +159,7 @@ class Commands(commands.Cog):
         async with self.bot.db.execute('SELECT user_id FROM notes') as cursor:
             user_ids = await cursor.fetchall()
 
-        member_list = [ctx.guild.get_member(i[0]) for i in user_ids]
+        member_list = [ctx.guild.get_member(i[0]) for i in user_ids if ctx.guild.get_member(i[0]) in ctx.guild.members]
 
         pages = menus.MenuPages(source=NotesMenu(member_list), clear_reactions_after=True)
         await pages.start(ctx)
